@@ -29,20 +29,20 @@ jobs:
             repository: 'CESNET/libyang.git'
             ref: 'v2.1.148'
       - name: make libyang v2.1.148 from upstream
-        run: mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE:String="Release" .. && make -j $(nproc) && sudo make install
+        run: cd .. && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE:String="Release" .. && make -j $(nproc) && sudo make install && cd ../iproute2-sysrepo
       - name: sysrepo v2.2.150 from upstream
         uses: actions/checkout@v4
         with:
           repository: 'sysrepo/sysrepo.git'
           ref: 'v2.2.150'
       - name: make sysrepo v2.2.150 from upstream
-        run: mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE:String="Release" .. && make -j $(nproc) && sudo make install
+        run: cd .. && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE:String="Release" .. && make -j $(nproc) && sudo make install && cd ../iproute2-sysrepo
       - name: run ldconfig
         run: sudo ldconfig
       - name: check sysrepo running ok
         run: sudo ldconfig && sudo sysrepoctl -l
       - name: make iproute2-sysrepo
-        run: cd .. && ls -l && CC=gcc make -j $(nproc)
+        run:  ls -l && CC=gcc make -j $(nproc)
       - name: basic compilation check
         run: ldd bin/iproute2-sysrepo
       - name: basic test ip address like
