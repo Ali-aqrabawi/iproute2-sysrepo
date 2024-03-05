@@ -14,7 +14,7 @@ EXEC = iproute2-sysrepo
 BIN  = bin
 
 CC        ?= gcc
-LDFLAGS   = -lyang -lsysrepo -lbpf -lelf -lmnl -lbsd -lcap -lselinux -lm -ldl -rdynamic -L/usr/local/lib -g --vtv-debug
+LDFLAGS   = -lyang -lsysrepo -lbpf -lelf -lmnl -lbsd -lcap -lselinux -lm -ldl -rdynamic -L/usr/local/lib
 SUBDIRS   = iproute2
 
 IPR2_SR_LIB_SRC = $(wildcard src/lib/*.c)
@@ -81,9 +81,9 @@ check:
 	yanglint yang/*.yang
 
 src/lib/%.o: src/lib/%.c
-	$(CC) -c $< -o $@ -Iiproute2/ip -Iiproute2/bridge -Iiproute2/tc -Iiproute2/include -g --vtv-debug
+	$(CC) -c $< -o $@ -Iiproute2/ip -Iiproute2/bridge -Iiproute2/tc -Iiproute2/include
 
 
 src/%.o: $(IPR2_SR_SRC) $(IPR2_SR_LIB_OBJ)
-	$(CC) -c $< -o $@ -Iiproute2/ip -Iiproute2/bridge -Iiproute2/tc -Iiproute2/include -g --vtv-debug
+	$(CC) -c $< -o $@ -Iiproute2/ip -Iiproute2/bridge -Iiproute2/tc -Iiproute2/include
 
