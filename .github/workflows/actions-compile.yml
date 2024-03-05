@@ -50,7 +50,7 @@ jobs:
       - name: install required kernel mod(s)
         run : sudo modprobe vrf bonding
       - name: delete me
-        run : sudo bin/iproute2-sysrepo ip link add name bond0 mtu 1500 down group 0 protodown on numtxqueues 1 numrxqueues 1 gso_max_size 65536 gso_ipv4_max_size 65536 gso_max_segs 65535 gro_max_size 65536 gro_ipv4_max_size 65536 txqueuelen 1000 arp off multicast off allmulticast off promisc off trailers on type bond
+        run : sudo bin/iproute2-sysrepo  ip link add name eth_b1 mtu 1500 down master bond0 group 0 protodown on numtxqueues 1 numrxqueues 1 gso_max_size 65536 gso_ipv4_max_size 65536 gso_max_segs 65535 gro_max_size 65536 gro_ipv4_max_size 65536 txqueuelen 1000 arp off multicast off allmulticast off promisc off trailers on type dummy type bond_slave
       - name: basic test "ip link add/set"
         run : |
           set -e
